@@ -1,3 +1,5 @@
+import os
+import dj_database_url
 """
 Django settings for ngo_website project.
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-5%oko_6)-d%2hfv!s7ixac=t!m@js(^$*6hq5*kx(6w7^c!+db
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ngo_website.urls'
@@ -125,3 +128,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "main" / "static"]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
