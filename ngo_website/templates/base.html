@@ -1,0 +1,44 @@
+<!-- main/templates/back_button.html -->
+<style>
+    .back-home-btn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 1000;
+        padding: 10px 18px;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        animation: slideIn 0.8s ease-out;
+    }
+
+    .back-home-btn:hover {
+        background: linear-gradient(135deg, #0056b3, #003f88);
+        transform: scale(1.1) rotate(-2deg);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .back-home-btn:active {
+        transform: scale(0.98);
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+<a href="{% url 'home' %}" class="back-home-btn">
+    ← Back to Home
+</a>

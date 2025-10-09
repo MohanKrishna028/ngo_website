@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOD 4 YOU</title>
+    {% load static %}
+    <style>
+        .admin-btn {
+            background-color: #c82333;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .admin-btn:hover {
+            background-color: #a71d2a;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f5f5f5;
+            padding: 50px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 🔴 Scrolling Quotes */
+        .quotes-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 10px 0;
+            margin-bottom: 5px;
+        }
+        .quotes {
+            display: inline-block;
+            white-space: nowrap;
+            color: red;
+            font-size: 25px;
+            font-weight: bold;
+            animation: scroll-left 40s linear infinite, colorChange 6s linear infinite;
+            background: linear-gradient(90deg, red, orange, gold, pink,rgb(0, 255, 255), red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes scroll-left {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+        /* 🌈 Smooth color gradient movement */
+        @keyframes colorChange {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+        header img {
+            height: 200px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.2rem;
+            margin: 0;
+        }
+        p {
+            color: #555;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        .btn {
+            display: inline-block;
+            margin: 15px;
+            padding: 12px 24px;
+            font-size: 18px;
+            color: white;
+            background: #007BFF;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        /* 🩸 Blog / Mission Section */
+        .blog-section {
+            margin-top: 60px;
+            text-align: left;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgb(255, 0, 0);
+        }
+        .blog-section h2 {
+            color: #b30000;
+            font-size: 26px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .blog-section p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #444;
+        }
+        .blog-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .blog-section ul li::before {
+            content: "🔹 ";
+            color: #b30000;
+            font-weight: bold;
+        }
+
+        /* 📸 Donor Side Sliders */
+        .side-slider {
+            position: absolute;
+            top: 150px;
+            width: 200px;
+            height: 500px;
+            overflow: hidden;
+        }
+        .side-slider.left {
+            left: 10px;
+        }
+        .side-slider.right {
+            right: 10px;
+        }
+        .slider-track {
+            display: flex;
+            flex-direction: column;
+            animation: slide-up 30s linear infinite;
+        }
+        @keyframes slide-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        .slider-track img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 10px;
+            margin: 10px auto;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* 📬 Social Icons */
+        .social-icons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .social-icons img {
+            width: 60px;
+            height: 60px;
+            margin: 0 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .social-icons img:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0px 8px 15px rgba(0,0,0,0.3);
+            border-radius: 15px;
+        }
+
+        /* 📱 Responsive */
+        @media (max-width: 900px) {
+            .side-slider {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 📸 Left Donor Slider -->
+    <div class="side-slider left">
+        <div class="slider-track">
+            {% for img in left_images %}
+                <img src="{{ img.image.url }}" alt="Left Donor">
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 📸 Right Donor Slider -->
+    <div class="side-slider right">
+        <div class="slider-track">
+            {% for img in right_images %}
+                <img src="{{ img.image.url }}" alt="Right Donor">
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 🔴 Scrolling Quotes -->
+    <div class="quotes-container">
+        <div class="quotes">
+            {% for q in quotes %}
+                "{{ q.text }}" -
+            {% endfor %}
+        </div>
+    </div>
+
+    <header>
+        <img src="{% static 'images/logo.png' %}" alt="BLOOD 4 YOU Logo">
+        <h1>Welcome to BLOOD 4 YOU Website</h1>
+    </header>
+
+    <p>A drop of kindness, a sea of life. 🌍</p>
+
+    <a href="{% url 'contact' %}" class="btn">Contact Us</a>
+    <a href="{% url 'volunteer' %}" class="btn">Volunteer</a>
+    <a href="{% url 'donate' %}" class="btn">Donate</a>
+    <a href="/admin/" class="admin-btn">Login as Admin</a>
+
+    <!-- 🩸 Mission Blog -->
+    <div class="blog-section">
+        <h2>🩸 Blood4You - Saving Lives Together 🩸</h2>
+        <p>
+            Welcome to <strong>Blood4You</strong>, a community dedicated to helping those in need of blood donations. 
+            Our goal is to connect donors with recipients and provide quick assistance during emergencies.
+        </p>
+
+        <h3>📍 How to Request Blood?</h3>
+        <ul>
+            <li>Patient Name</li>
+            <li>Blood Group</li>
+            <li>Hospital Name & Location</li>
+            <li>Purpose</li>
+            <li>Contact Number</li>
+        </ul>
+
+        <p><strong>⚠ Donors, please verify the request before proceeding.</strong></p>
+
+        <p style="text-align:center; color:#b30000; font-weight:bold;">
+            Together, we can make a difference! ❤️ <br>
+            #DonateBlood #SaveLives #Blood4You
+        </p>
+
+        <!-- 📬 Connect with Us -->
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 28px; font-weight: bold;">
+            📬 Connect with Us
+        </h3>
+        <div class="social-icons">
+            <!-- Gmail -->
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=blood4you.team@gmail.com" target="_blank">
+    <img src="{% static 'images/gmail.png' %}" alt="Gmail">
+</a>
+
+<!-- Instagram -->
+<a href="https://instagram.com/blood_4_you_2k23" target="_blank">
+    <img src="{% static 'images/instagram.png' %}" alt="Instagram">
+</a>
+        </div>
+    </div>
+
+</body>
+</html>

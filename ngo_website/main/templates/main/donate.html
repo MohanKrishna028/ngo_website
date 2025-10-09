@@ -1,0 +1,145 @@
+{% include 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donate - Blood4You</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffb3b3, #ffe6e6);
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #b30000;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        form {
+            background: #fff;
+            padding: 25px 40px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: popIn 1s ease;
+        }
+
+        form:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(179, 0, 0, 0.2);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        input[type="text"], input[type="file"] {
+            display: block;
+            margin: 15px auto;
+            padding: 12px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="file"]:focus {
+            border-color: #b30000;
+            box-shadow: 0 0 8px rgba(179, 0, 0, 0.3);
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #b30000;
+            border: none;
+            color: white;
+            font-size: 17px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #800000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(179, 0, 0, 0.4);
+        }
+
+        .certificate-box {
+            margin-top: 40px;
+            padding: 25px;
+            background: #fff0f0;
+            border: 2px dashed #b30000;
+            border-radius: 10px;
+            display: inline-block;
+            animation: floatBox 3s ease-in-out infinite;
+        }
+
+        @keyframes floatBox {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .certificate-box p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .certificate-box a {
+            color: #b30000;
+            font-weight: bold;
+            font-size: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .certificate-box a:hover {
+            color: #800000;
+            transform: scale(1.1);
+        }
+
+        h2 {
+            color: #444;
+            font-weight: 500;
+            margin-bottom: 25px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>🩸 Donor Registration 🩸</h1>
+    <h2>Please upload your photo of donating blood to proceed and get your certificate.</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Proceed</button>
+    </form>
+
+    {% if uploaded %}
+        <div class="certificate-box">
+            <p>✅ Photo uploaded successfully!</p>
+            <p><a href="{{ form_link }}" target="_blank">👉 Fill the Certificate Request Form</a></p>
+        </div>
+    {% endif %}
+</body>
+</html>

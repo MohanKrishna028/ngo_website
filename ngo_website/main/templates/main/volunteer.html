@@ -1,0 +1,130 @@
+{% include 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Data</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #fff5f5, #ffeaea);
+            text-align: center;
+            margin: 0;
+            padding: 80px 20px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            color: #b30000;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        table {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 8px 20px rgba(179, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #b30000;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #ffeaea;
+            transform: scale(1.01);
+            transition: 0.3s ease;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2rem;
+            margin-top: 40px;
+        }
+
+/* 🔙 Back to Home Button */
+.back-home-btn {
+    position: absolute;  /* changed from fixed ✅ */
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 12px 22px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: slideDown 0.8s ease-out;
+}
+
+.back-home-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #003f88);
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translate(-50%, -30px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔙 Back to Home Button -->
+    <a href="{% url 'home' %}" class="back-home-btn">← Back to Home</a>
+
+    <h1>Volunteer Data 📋</h1>
+
+    {% if values %}
+        <table>
+            <tr>
+                {% for header in values.0 %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in values|slice:"1:" %}
+                <tr>
+                    {% for col in row %}
+                        <td>{{ col }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No data found.</p>
+    {% endif %}
+
+</body>
+</html>

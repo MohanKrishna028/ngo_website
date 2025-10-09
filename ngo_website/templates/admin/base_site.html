@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">Django Administration</a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}
+    <a href="/" style="
+        background-color:#3c8dbc;
+        color:white;
+        padding:6px 12px;
+        border-radius:5px;
+        text-decoration:none;
+        font-weight:bold;
+        margin-right:10px;
+    ">🏠 Back to Home</a>
+    {{ block.super }}
+{% endblock %}
